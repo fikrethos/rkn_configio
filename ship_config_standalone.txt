@@ -115,6 +115,16 @@ function rkn_menu.createTitleBar(frame)
 			dropdown.properties.icon.color = overridecolor
 		end
 		if (menu.mode == "upgrade") and (not menu.isReadOnly) and (menu.object ~= 0) then
+			
+			-- Fikret Ekleme
+			local hasBlueprint = C.GetNumBlueprints("", "", GetComponentData(ConvertStringTo64Bit(curShipOption), "macro")) > 0
+			for _,v in ipairs(shipOptions) do
+				if v.id == curShipOption then
+					v.text = hasBlueprint and Helper.convertColorToText(Color.text_player) .. "* " .. Helper.convertColorToText(Color.text_normal) .. v.text or v.text
+				end
+			end
+			-- Fikret Ekleme Son
+
 			if not C.CanContainerEquipShip(menu.container, menu.object) then
 				active = false
 			end
